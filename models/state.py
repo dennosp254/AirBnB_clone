@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 """
-This file defines state Model class
+This file defines  stateModel class
 """
 
-from model.base_model import BaseModel
+
+from models.base_model import BaseModel
+
 
 class State(BaseModel):
-	# State model
-	
-	# Attributes
-	name: str = ''
+    # state model
+
+    # Atrributes
+    name: str = ''

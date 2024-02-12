@@ -1,35 +1,36 @@
 #!/usr/bin/python3
-"""
-This defines the BaseModel class which will
-serve as the base of our model
-"""
 
+"""
+This file defines  the BaseModel class which will
+serve as the base of ou model.
+"""
 from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
-	""" Base class for all our classes """
-	
-	def __init__(self, *args, **kwargs):
-		""" Deserialize and serialize a class """
+    """Base class for all our classes"""
 
-		""" Initialize if nothing is passed """
-		if kwargs == {}:
-			self.id = str(uuid4())
-			self.created_at = datetime.utcnow()
-			self.updated_at = datetime.utcnow()
-			models.storage.new(self)
-			return
+    def __init__(self, *args, **kwargs):
+        """ deserialize and serialize a class """
 
-		""" Using keywords (desirialize) """
-		if 'id' not in kwargs:
-			kwargs['id'] = str(uuid4())
-		self.id = kwargs['id']
+        """initialize  if nothing is passed"""
+        if kwargs == {}:
+            self.id = str(uuid4())
+            self.created_at = datetime.utcnow()
+            self.updated_at = datetime.utcnow()
+            models.storage.new(self)
+            return
 
-		for Key, val in kwargs.items():
-			if Key == "__class_":
-				continue
+        """using Key words (deserialize)"""
+        if 'id' not in kwargs:
+            kwargs['id'] = str(uuid4())
+        self.id = kwargs['id']
+
+        for Key, val in kwargs.items():
+            if Key == "__class_":
+                continue
         if "created_at" in kwargs:
             self.created_at = datetime.strptime(
                     kwargs['created_at'],
